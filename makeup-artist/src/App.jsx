@@ -24,12 +24,18 @@ const FontLink = () => (
 
     html { scroll-behavior: smooth; }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--beige);
-      color: var(--text-dark);
-      overflow-x: hidden;
-    }
+   html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--beige);
+  color: var(--text-dark);
+}
+  
 
     h1,h2,h3,h4,h5 { font-family: 'Playfair Display', serif; }
 
@@ -95,12 +101,6 @@ const FontLink = () => (
     /* Reveal on scroll */
     .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    html, body, #root {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
 
     /* Navbar */
     .navbar {
@@ -186,14 +186,19 @@ const FontLink = () => (
 
     /* Hero */
     .hero-section {
-      min-height: 100vh;
+  width: 100vw;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #FAF3F0 0%, #F5E6E0 40%, #EDD0D8 100%);
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
   display: flex;
   align-items: center;
-      width: 100%;
-      background: linear-gradient(135deg, #FAF3F0 0%, #F5E6E0 40%, #EDD0D8 100%);
-      position: relative; overflow: hidden;
-      display: flex; align-items: center;
-    }
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
     .hero-blob-1 {
       position: absolute; width: 500px; height: 500px;
       background: radial-gradient(circle, rgba(232,180,184,0.35) 0%, transparent 70%);
@@ -206,7 +211,7 @@ const FontLink = () => (
     }
     .hero-image-frame {
       position: relative;
-      width: 420px; max-width: 100%;
+      width: 380px; max-width: 100%;
     }
     .hero-image-frame::before {
       content: '';
@@ -228,17 +233,6 @@ const FontLink = () => (
       box-shadow: 0 10px 40px rgba(192,108,132,0.2);
       animation: float 4s ease-in-out infinite;
     }
- .container {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 80px;
-}
-
-.hero-section .container {
-  max-width: 100%;
-  padding: 0 100px;
-}
 
     /* Service cards */
     .service-icon {
@@ -316,19 +310,6 @@ const FontLink = () => (
     }
     .form-input.error { border-color: #e74c3c; }
     .error-msg { font-size: 0.75rem; color: #e74c3c; }
-
-    /* WhatsApp */
-    .whatsapp-fab {
-      position: fixed; bottom: 30px; right: 30px; z-index: 999;
-      width: 58px; height: 58px; border-radius: 50%;
-      background: #25D366;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 8px 25px rgba(37,211,102,0.4);
-      cursor: pointer;
-      animation: pulse-rose 2.5s infinite;
-      transition: transform 0.3s ease;
-    }
-    .whatsapp-fab:hover { transform: scale(1.12); }
 
     /* Footer */
     .footer {
@@ -487,8 +468,8 @@ function Navbar({ currentPage, setPage }) {
           style={{ cursor:"pointer" }}
           onClick={() => { setPage("Home"); setMenuOpen(false); window.scrollTo(0,0); }}
         >
-          <div style={{ fontFamily:"'Playfair Display',serif", fontSize:"1.4rem", color:"var(--rose)", fontStyle:"italic" }}>
-            Amara Beauty
+          <div style={{ fontFamily:"'Playfair Display',serif", fontSize:"1.2rem", color:"var(--rose)", fontStyle:"italic" }}>
+            Make Over By Jyoti
           </div>
           <div style={{ fontSize:"0.6rem", letterSpacing:"3px", textTransform:"uppercase", color:"var(--text-light)", marginTop:"-2px" }}>
             Luxury Makeup Artistry
@@ -539,32 +520,17 @@ function Navbar({ currentPage, setPage }) {
   );
 }
 
-// ─── WhatsApp FAB ─────────────────────────────────────────────────────────────
-function WhatsAppFAB() {
-  return (
-    <a
-      href="https://wa.me/919876543210"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="whatsapp-fab"
-      aria-label="WhatsApp"
-    >
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-      </svg>
-    </a>
-  );
-}
+// WhatsApp FAB removed per client request
 
 // ─── Footer ──────────────────────────────────────────────────────────────────
 function Footer({ setPage }) {
   return (
     <footer className="footer">
       <div className="container">
-        <div style={{ display:"grid", gridTemplateColumns:"2fr 1fr 1fr", gap:48, marginBottom:48 }}>
+        <div style={{ display:"grid", gridTemplateColumns:"1.3fr 0.7fr", gap:40, marginBottom:48, alignItems:"center",paddingTop:80  }}>
           <div>
             <div style={{ fontFamily:"'Playfair Display',serif", fontSize:"1.5rem", color:"white", fontStyle:"italic", marginBottom:12 }}>
-              Amara Beauty
+              Make Over By Jyoti
             </div>
             <p style={{ fontSize:"0.88rem", lineHeight:1.8, maxWidth:280 }}>
               Luxury makeup artistry for the modern woman. Transforming faces, elevating confidence, and creating timeless beauty memories.
@@ -592,9 +558,7 @@ function Footer({ setPage }) {
           <div>
             <div style={{ color:"white", fontWeight:600, marginBottom:20, letterSpacing:"1px", textTransform:"uppercase", fontSize:"0.78rem" }}>Contact</div>
             {[
-              ["📍","Mumbai, Maharashtra, India"],
-              ["📞","+91 98765 43210"],
-              ["✉️","hello@amarabeauty.com"],
+              ["📍","Agra, Uttar Pradesh, India"],
               ["🕐","Mon–Sat: 9am – 7pm"],
             ].map(([icon, text], i) => (
               <div key={i} style={{ display:"flex", gap:10, marginBottom:14, fontSize:"0.85rem", alignItems:"flex-start" }}>
@@ -605,7 +569,7 @@ function Footer({ setPage }) {
           </div>
         </div>
         <div style={{ borderTop:"1px solid rgba(255,255,255,0.1)", paddingTop:24, textAlign:"center", fontSize:"0.8rem", color:"rgba(255,255,255,0.4)" }}>
-          © 2025 Amara Beauty. All rights reserved. Crafted with 💗 for luxury brides.
+          © 2025 Make Over By Jyoti. All rights reserved. Crafted with 💗 for luxury brides.
         </div>
       </div>
       <style>{`
@@ -629,8 +593,8 @@ function HomePage({ setPage }) {
   ];
 
   const testimonials = [
-    { name:"Priya Sharma", role:"Bride, Dec 2024", stars:5, text:"Amara made me feel like an absolute goddess on my wedding day. The makeup lasted the entire 16-hour day without touch-ups!" },
-    { name:"Kavya Mehta", role:"Fashion Blogger", stars:5, text:"I've worked with many artists, but Amara's editorial work is in a different league. Precision, creativity, and pure artistry." },
+    { name:"Priya Sharma", role:"Bride, Dec 2024", stars:5, text:"Jyoti made me feel like an absolute goddess on my wedding day. The makeup lasted the entire 16-hour day without touch-ups!" },
+    { name:"Kavya Mehta", role:"Fashion Blogger", stars:5, text:"I've worked with many artists, but Jyoti's editorial work is in a different league. Precision, creativity, and pure artistry." },
     { name:"Riya Patel", role:"Birthday Girl", stars:5, text:"My birthday glam was perfection. She understood my vision instantly and delivered something even more beautiful than I imagined." },
   ];
 
@@ -640,29 +604,20 @@ function HomePage({ setPage }) {
       <section className="hero-section">
         <div className="hero-blob-1"/>
         <div className="hero-blob-2"/>
-        <div className="container" style={{
-  display: "grid",
-  gridTemplateColumns: "1fr 1fr",
-  gap: "100px",
-  alignItems: "center",
-  width: "100%",
-  maxWidth: "1400px",
-  margin: "0 auto",
-  padding: "120px 80px"
-}}>
+        <div className="container" style={{ display:"grid", gridTemplateColumns:"1.3fr 0.7fr", gap:64, alignItems:"center", paddingTop:60 }}>
           {/* Left */}
           <div>
             <div className="animate-fade-up" style={{ display:"inline-flex", alignItems:"center", gap:8, background:"rgba(232,180,184,0.25)", border:"1px solid rgba(232,180,184,0.5)", borderRadius:50, padding:"8px 18px", marginBottom:28 }}>
               <span style={{ width:6, height:6, borderRadius:"50%", background:"var(--rose)", display:"inline-block" }}/>
-              <span style={{ fontSize:"0.72rem", fontWeight:500, letterSpacing:"2px", textTransform:"uppercase", color:"var(--rose)" }}>Mumbai's Luxury Makeup Artist</span>
+              <span style={{ fontSize:"0.72rem", fontWeight:500, letterSpacing:"2px", textTransform:"uppercase", color:"var(--rose)" }}>Agra's Luxury Makeup Artist</span>
             </div>
-            <h1 className="animate-fade-up delay-1" style={{ fontSize:"clamp(2.8rem,5vw,4.2rem)", lineHeight:1.15, color:"var(--text-dark)" }}>
+            <h1 className="animate-fade-up delay-1" style={{ fontSize: "clamp(3.2rem, 6vw, 4.8rem)", lineHeight:1.15, color:"var(--text-dark)" }}>
               Where Beauty<br/>
               <em style={{ color:"var(--rose)" }}>Becomes Art</em>
             </h1>
             <p className="animate-fade-up delay-2" style={{ marginTop:24, fontSize:"1.05rem", lineHeight:1.8, color:"var(--text-mid)", maxWidth:440 }}>
               Award-winning makeup artistry for brides, editorials & events. 
-              Over 800 clients transformed with the magic touch of Amara.
+              Over 800 clients transformed with the magic touch of Jyoti.
             </p>
             <div className="animate-fade-up delay-3 flex gap-4" style={{ marginTop:40, gap:16, flexWrap:"wrap" }}>
               <button className="btn-primary" onClick={() => { setPage("Booking"); window.scrollTo(0,0); }}>
@@ -690,7 +645,7 @@ function HomePage({ setPage }) {
                 flexDirection:"column", gap:16
               }}>
                 <div style={{ fontSize:"5rem" }}>💄</div>
-                <div style={{ fontFamily:"'Playfair Display',serif", fontSize:"1.2rem", color:"white", fontStyle:"italic" }}>Amara Beauty</div>
+                <div style={{ fontFamily:"'Playfair Display',serif", fontSize:"1.2rem", color:"white", fontStyle:"italic" }}>Make Over By Jyoti</div>
                 <div style={{ fontSize:"0.7rem", letterSpacing:"3px", color:"rgba(255,255,255,0.8)", textTransform:"uppercase" }}>Luxury Artistry</div>
               </div>
               <div className="hero-badge animate-float">
@@ -770,7 +725,7 @@ function HomePage({ setPage }) {
                 Crafting Beauty,<br/><em style={{ color:"var(--rose)" }}>One Brushstroke</em><br/>at a Time
               </h2>
               <p style={{ color:"var(--text-mid)", lineHeight:1.9, marginBottom:20 }}>
-                Hi, I'm Amara — a luxury makeup artist based in Mumbai with over 6 years of experience in bridal, editorial, and event makeup. My philosophy is simple: every face tells a story, and makeup is just the ink.
+                Hi, I'm Jyoti — a luxury makeup artist based in Agra with over 6 years of experience in bridal, editorial, and event makeup. My philosophy is simple: every face tells a story, and makeup is just the ink.
               </p>
               <p style={{ color:"var(--text-mid)", lineHeight:1.9, marginBottom:32 }}>
                 Trained at CIDESCO and certified by MAC Cosmetics, I combine technical precision with artistic intuition to create looks that feel authentically you — only elevated.
@@ -868,7 +823,7 @@ function HomePage({ setPage }) {
             Ready to Look & Feel<br/><em>Absolutely Stunning?</em>
           </div>
           <p className="reveal" style={{ opacity:0.85, marginBottom:40, fontSize:"1.05rem", maxWidth:480, margin:"0 auto 40px" }}>
-            Limited bookings available each month. Secure your date with Amara today.
+            Limited bookings available each month. Secure your date with Jyoti today.
           </p>
           <div className="reveal flex gap-4" style={{ justifyContent:"center", gap:16, flexWrap:"wrap" }}>
             <button
@@ -906,11 +861,11 @@ function AboutPage() {
   ];
 
   const timeline = [
-    { year:"2018", title:"The Beginning", desc:"Graduated from CIDESCO International and started my journey in Mumbai's beauty scene." },
+    { year:"2018", title:"The Beginning", desc:"Graduated from CIDESCO International and started my journey in Agra's beauty scene." },
     { year:"2019", title:"MAC Certified", desc:"Completed advanced certification with MAC Cosmetics in NYC. Specialized in HD and airbrush techniques." },
     { year:"2021", title:"Editorial Breakthrough", desc:"Featured in Vogue India's bridal issue. Worked with top-tier fashion photographers across India." },
     { year:"2023", title:"500 Brides Milestone", desc:"Celebrated the milestone of transforming 500 brides. Launched signature skincare-first approach." },
-    { year:"2025", title:"Today", desc:"Mumbai's most sought-after luxury makeup artist. Amara Beauty Studio opens its doors." },
+    { year:"2025", title:"Today", desc:"Agra's most sought-after luxury makeup artist. Make Over By Jyoti Studio opens its doors." },
   ];
 
   return (
@@ -922,7 +877,7 @@ function AboutPage() {
           <h1 className="section-title reveal" style={{ marginTop:8 }}>Behind the Brush</h1>
           <div className="section-divider reveal"/>
           <p className="reveal" style={{ marginTop:24, color:"var(--text-mid)", maxWidth:560, margin:"24px auto 0", lineHeight:1.8 }}>
-            I'm Amara Singh — an artist who believes that true beauty is about authenticity, confidence, and feeling like the best version of yourself.
+            I'm Jyoti — an artist who believes that true beauty is about authenticity, confidence, and feeling like the best version of yourself.
           </p>
         </div>
       </div>
@@ -939,7 +894,7 @@ function AboutPage() {
                   display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:16
                 }}>
                   <div style={{ fontSize:"7rem" }}>💋</div>
-                  <div style={{ fontFamily:"'Playfair Display',serif", color:"white", fontSize:"1.4rem", fontStyle:"italic" }}>Amara Singh</div>
+                  <div style={{ fontFamily:"'Playfair Display',serif", color:"white", fontSize:"1.4rem", fontStyle:"italic" }}>Jyoti</div>
                   <div style={{ color:"rgba(255,255,255,0.8)", fontSize:"0.8rem", letterSpacing:"2px", textTransform:"uppercase" }}>Lead Makeup Artist</div>
                 </div>
                 <div style={{ position:"absolute", bottom:-20, right:-20, background:"white", borderRadius:20, padding:"20px 24px", boxShadow:"0 10px 40px rgba(192,108,132,0.2)" }}>
@@ -957,7 +912,7 @@ function AboutPage() {
                 Growing up surrounded by art in a family of painters, I discovered my canvas wasn't walls or paper — it was faces. My first kit was borrowed from my mother's vanity, and somehow, that's where my story began.
               </p>
               <p style={{ color:"var(--text-mid)", lineHeight:1.9, marginBottom:20 }}>
-                Today, I lead a boutique studio in South Mumbai, catering exclusively to clients who value artistry over assembly-line beauty. Every appointment begins with a consultation that goes deeper than skin — I want to know how you want to feel.
+                Today, I lead a boutique studio in Agra, catering exclusively to clients who value artistry over assembly-line beauty. Every appointment begins with a consultation that goes deeper than skin — I want to know how you want to feel.
               </p>
               <p style={{ color:"var(--text-mid)", lineHeight:1.9, marginBottom:32 }}>
                 I'm CIDESCO certified, MAC trained, and obsessed with skincare as the foundation of all great makeup. My kit features only cruelty-free, luxury brands chosen for performance and ethics.
@@ -1111,7 +1066,7 @@ function ServicesPage({ setPage }) {
             ))}
           </div>
           <div className="text-center reveal" style={{ marginTop:60 }}>
-            <p style={{ color:"var(--text-mid)", marginBottom:24 }}>Ready to experience the Amara Beauty difference?</p>
+            <p style={{ color:"var(--text-mid)", marginBottom:24 }}>Ready to experience the Make Over By Jyoti difference?</p>
             <button className="btn-primary" onClick={() => { setPage("Booking"); window.scrollTo(0,0); }}>
               Book Your Session
             </button>
@@ -1313,7 +1268,7 @@ function BookingPage() {
           <h1 className="section-title reveal" style={{ marginTop:8 }}>Book a Session</h1>
           <div className="section-divider reveal"/>
           <p className="reveal" style={{ marginTop:20, color:"var(--text-mid)", maxWidth:480, margin:"20px auto 0", lineHeight:1.8 }}>
-            Fill in the form below and Amara will confirm your appointment within 24 hours.
+            Fill in the form below and Jyoti will confirm your appointment within 24 hours.
           </p>
         </div>
       </div>
@@ -1325,7 +1280,7 @@ function BookingPage() {
               <div style={{ fontSize:"4rem", marginBottom:20 }}>🌸</div>
               <h2 style={{ fontFamily:"'Playfair Display',serif", fontSize:"2rem", color:"var(--rose)", marginBottom:16 }}>Booking Received!</h2>
               <p style={{ color:"var(--text-mid)", lineHeight:1.8, maxWidth:400, margin:"0 auto 32px" }}>
-                Thank you, {form.name}! Your request has been received. Amara will reach out within 24 hours to confirm your booking.
+                Thank you, {form.name}! Your request has been received. Jyoti will reach out within 24 hours to confirm your booking.
               </p>
               <button className="btn-primary" onClick={() => { setSubmitted(false); setForm({ name:"",phone:"",email:"",date:"",service:"",notes:"",time:"" }); }}>
                 Make Another Booking
@@ -1428,9 +1383,7 @@ function ContactPage() {
             <div className="reveal">
               <h3 style={{ fontFamily:"'Playfair Display',serif", fontSize:"1.6rem", marginBottom:28 }}>Studio Information</h3>
               {[
-                { icon:"📍", title:"Studio Address", info:"Amara Beauty Studio\n202, Harmony Heights,\nPedder Road, South Mumbai\nMaharashtra 400 026" },
-                { icon:"📞", title:"Phone & WhatsApp", info:"+91 98765 43210" },
-                { icon:"✉️", title:"Email", info:"hello@amarabeauty.com\nbookings@amarabeauty.com" },
+                { icon:"📍", title:"Studio Address", info:"Make Over By Jyoti\nAgra, Uttar Pradesh\nIndia 282 001" },
                 { icon:"🕐", title:"Working Hours", info:"Monday – Saturday: 9:00 AM – 7:00 PM\nSunday: By appointment only" },
               ].map((item, i) => (
                 <div key={i} style={{ display:"flex", gap:18, marginBottom:28, padding:"24px", background:"var(--beige)", borderRadius:16, transition:"all 0.3s" }}
@@ -1448,7 +1401,7 @@ function ContactPage() {
               <div>
                 <div style={{ fontWeight:600, fontSize:"0.78rem", color:"var(--text-light)", letterSpacing:"2px", textTransform:"uppercase", marginBottom:16 }}>Follow Along</div>
                 <div style={{ display:"flex", gap:12 }}>
-                  {[["📷","@amarabeauty_official"],["📘","Amara Beauty"],["🐦","@amarabeauty"],["▶","Amara Beauty Studio"]].map(([icon, handle], i) => (
+                  {[["📷","@makeoverjyoti"],["📘","Make Over By Jyoti"],["🐦","@makeoverjyoti"],["▶","Make Over By Jyoti Studio"]].map(([icon, handle], i) => (
                     <div key={i} className="social-link" title={handle}>{icon}</div>
                   ))}
                 </div>
@@ -1494,8 +1447,8 @@ function ContactPage() {
               {/* Map placeholder */}
               <div style={{ marginTop:28, borderRadius:20, overflow:"hidden", height:260, background:"linear-gradient(135deg, var(--nude), var(--soft-pink))", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", boxShadow:"var(--shadow-soft)" }}>
                 <div style={{ fontSize:"3rem", marginBottom:12 }}>📍</div>
-                <div style={{ fontFamily:"'Playfair Display',serif", fontSize:"1.1rem", color:"var(--text-dark)", fontStyle:"italic" }}>Amara Beauty Studio</div>
-                <div style={{ fontSize:"0.82rem", color:"var(--text-mid)", marginTop:6 }}>Pedder Road, South Mumbai</div>
+                <div style={{ fontFamily:"'Playfair Display',serif", fontSize:"1.1rem", color:"var(--text-dark)", fontStyle:"italic" }}>Make Over By Jyoti</div>
+                <div style={{ fontSize:"0.82rem", color:"var(--text-mid)", marginTop:6 }}>Agra, Uttar Pradesh</div>
                 <a
                   href="https://maps.google.com"
                   target="_blank"
@@ -1530,16 +1483,17 @@ export default function App() {
     }
   };
 
-  return (
-    <>
-      <FontLink />
-      <title>Amara Beauty | Luxury Makeup Artist Mumbai</title>
-      <Navbar currentPage={page} setPage={setPage} />
-      <main key={page} className="animate-page-in">
-        {renderPage()}
-      </main>
-      <Footer setPage={setPage} />
-      <WhatsAppFAB />
-    </>
-  );
+ 
+return (
+  <>
+    <FontLink />
+    <title>Make Over By Jyoti | Luxury Makeup Artist in Agra</title>
+    <Navbar currentPage={page} setPage={setPage} />
+    <main key={page} className="animate-page-in">
+      {renderPage()}
+    </main>
+    <Footer setPage={setPage} />
+  </>
+);
+  
 }
