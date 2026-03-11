@@ -1,0 +1,3 @@
+<div className="hero-image">
+  <img src={https://unsplash.com/photos/a-woman-in-a-red-and-gold-bridal-outfit-0SALF40WfQg} alt="Bridal Makeup" />
+</div>
